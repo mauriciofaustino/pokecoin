@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="pt-BR">
+<head th:include="include/layout :: htmlhead"><title>Pokecoin</title></head>
+<body>
+<nav th:replace="include/layout :: navbar" ></nav>
+
+<main>
+    <div class="container py-4">
+        <img src="#" alt="pokecoin" th:src="@{assets/images/pokecoin.png}" />
+        <h1>Home</h1>
+
+    </div>
+</main>
+</body>
+</html>

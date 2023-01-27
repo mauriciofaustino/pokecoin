@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crie um novo usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<main>
+    <div class="container py-4">
+        <h1>Crie um novo usuario</h1>
+        <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show mt-3">
+            <p th:text="${erro}"/>
+        </div>
+        <form method="post" action="#" th:action="@{/users/create}" th:object="${user}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Login</label>
+                <input type="text" id="username" th:field="${user.username}" class="form-control" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" id="password" th:field="${user.password}" class="form-control" name="date">
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Criar usuário</button>
+            </div>
+            <div class="mb-3">
+                <a th:href="@{/login}">Voltar para a tela de login</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
