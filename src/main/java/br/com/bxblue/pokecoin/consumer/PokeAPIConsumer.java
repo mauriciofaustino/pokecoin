@@ -3,6 +3,7 @@ package br.com.bxblue.pokecoin.consumer;
 import br.com.bxblue.pokecoin.dto.PokemonDTO;
 import br.com.bxblue.pokecoin.dto.PokemonResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -21,9 +22,10 @@ public class PokeAPIConsumer {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 ObjectMapper mapper = new ObjectMapper();
+                mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
                 return mapper.readValue(response.body(), PokemonDTO.class);
             } else {
-                throw new RuntimeException("Error " + response.statusCode());
+                throw new RuntimeException("Error "+ response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,10 +41,11 @@ public class PokeAPIConsumer {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 ObjectMapper mapper = new ObjectMapper();
+                mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
                 PokemonResponse pokemonResponse = mapper.readValue(response.body(), PokemonResponse.class);
                 return pokemonResponse.getResults();
             } else {
-                throw new RuntimeException("Error " + response.statusCode());
+                throw new RuntimeException("Error "+ response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

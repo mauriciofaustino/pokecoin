@@ -4,6 +4,7 @@ import br.com.bxblue.pokecoin.consumer.PokeAPIConsumer;
 import br.com.bxblue.pokecoin.dto.PokemonDTO;
 import br.com.bxblue.pokecoin.entity.Pokemon;
 import br.com.bxblue.pokecoin.entity.User;
+import br.com.bxblue.pokecoin.exception.ValidationException;
 import br.com.bxblue.pokecoin.repository.PokemonRepository;
 import br.com.bxblue.pokecoin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PokemonService {
@@ -44,4 +47,9 @@ public class PokemonService {
     }
 
 
+    public void remove(UUID id) throws ValidationException {
+        Optional<Pokemon> pokemon = pokemonRepository.findById(id);
+        if (pokemon.isEmpty()) throw new ValidationException("Pokemon nao encontrado");
+        pokemonRepository.delete(pokemon.get());
+    }
 }

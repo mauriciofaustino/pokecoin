@@ -3,13 +3,14 @@ package br.com.bxblue.pokecoin.controller;
 import br.com.bxblue.pokecoin.consumer.PokeAPIConsumer;
 import br.com.bxblue.pokecoin.dto.PokemonDTO;
 import br.com.bxblue.pokecoin.entity.Pokemon;
+import br.com.bxblue.pokecoin.exception.ValidationException;
 import br.com.bxblue.pokecoin.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 public class PokemonController {
@@ -28,6 +29,17 @@ public class PokemonController {
     public String create(@ModelAttribute("user") PokemonDTO pokemonDTO, Model model) {
         Pokemon pokemonCreated = this.pokemonService.create(pokemonDTO);
         model.addAttribute("message", "Pokemon registrado com sucesso");
+        return "pokemon/message";
+    }
+
+    @GetMapping("/pokemon/remove/{id}")
+    public String remove(@PathVariable("id") UUID id, Model model) {
+        try {
+            this.pokemonService.remove(id);
+            model.addAttribute("message", "Registro de venda de pokemon feito com sucesso");
+        } catch (ValidationException e) {
+            model.addAttribute("message", "Ocorreu um erro ao registrar venda de pokemon");
+        }
         return "pokemon/message";
     }
 }
