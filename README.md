@@ -9,3 +9,5 @@ Para rodar:
 ./mvnw spring-boot:run 
 ```
 
+## Diagrama da Base de Dados
+![Database Diagram](https://raw.githubusercontent.com/mauriciofaustino/pokecoin/main/src/main/resources/static/assets/images/img.png)
