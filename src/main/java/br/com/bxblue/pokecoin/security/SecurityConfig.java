@@ -1,6 +1,6 @@
 package br.com.bxblue.pokecoin.security;
 
-import br.com.bxblue.pokecoin.service.CustomUserDetailsService;
+import br.com.bxblue.pokecoin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomUserDetailsService userDetailsService;
+    UserService userDetailsService;
 
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

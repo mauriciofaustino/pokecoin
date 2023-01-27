@@ -3,13 +3,9 @@ package br.com.bxblue.pokecoin.service;
 import br.com.bxblue.pokecoin.consumer.PokeAPIConsumer;
 import br.com.bxblue.pokecoin.dto.PokemonDTO;
 import br.com.bxblue.pokecoin.entity.Pokemon;
-import br.com.bxblue.pokecoin.entity.User;
 import br.com.bxblue.pokecoin.exception.ValidationException;
 import br.com.bxblue.pokecoin.repository.PokemonRepository;
-import br.com.bxblue.pokecoin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +14,12 @@ import java.util.UUID;
 
 @Service
 public class PokemonService {
-
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TransactionService transactionService;
     @Autowired
     private PokemonRepository pokemonRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
 
     public Pokemon create(PokemonDTO pokemonDTO) {
         PokeAPIConsumer consumer = new PokeAPIConsumer();
@@ -32,24 +27,20 @@ public class PokemonService {
         Pokemon pokemon = new Pokemon();
         pokemon.setName(pokemonResponse.getName());
         pokemon.setBaseExperience(pokemonResponse.getBaseExperience());
-        pokemon.setUserId(getUser().getId());
+        pokemon.setUserId(userService.getUser().getId());
         pokemonRepository.save(pokemon);
+        transactionService.registerTransaction(pokemon, "Registro de compra");
         return pokemon;
     }
 
     public List<Pokemon> listByUser() {
-        return pokemonRepository.findByUserId(getUser().getId());
+        return pokemonRepository.findByUserId(userService.getUser().getId());
     }
-
-    private User getUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByUsername(auth.getName());
-    }
-
 
     public void remove(UUID id) throws ValidationException {
         Optional<Pokemon> pokemon = pokemonRepository.findById(id);
         if (pokemon.isEmpty()) throw new ValidationException("Pokemon nao encontrado");
         pokemonRepository.delete(pokemon.get());
+        transactionService.registerTransaction(pokemon.get(), "Registro de venda");
     }
 }

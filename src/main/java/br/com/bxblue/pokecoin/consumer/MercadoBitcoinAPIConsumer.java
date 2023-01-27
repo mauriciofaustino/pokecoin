@@ -1,9 +1,5 @@
 package br.com.bxblue.pokecoin.consumer;
 
-import br.com.bxblue.pokecoin.dto.BTCPriceResponse;
-import br.com.bxblue.pokecoin.dto.BTCPriceTicketResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -16,7 +12,7 @@ import java.net.http.HttpResponse;
 public class MercadoBitcoinAPIConsumer {
     private final HttpClient client = HttpClient.newHttpClient();
 
-    public Double getValorBitcoin() {
+    public Double getBtcPrice() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.mercadobitcoin.net/api/BTC/ticker/"))
                 .build();

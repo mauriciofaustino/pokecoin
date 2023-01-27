@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="pt-BR">
+<head th:include="include/layout :: htmlhead"><title>Pokecoin</title></head>
+<body>
+<nav th:replace="include/layout :: navbar"></nav>
+
+<main>
+    <div class="container py-4">
+        <h3>Transa&ccedil;ões</h3>
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data/Hora</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Base XP</th>
+                <th scope="col">Valor em USD</th>
+            </tr>
+            <th:block th:each="transaction : ${transactions}">
+                <tr>
+                    <td th:text="${transaction.id}"></td>
+                    <td th:text="${transaction.type}"></td>
+                    <td th:text="${transaction.dateCreated}"></td>
+                    <td th:text="${transaction.name}"></td>
+                    <td th:text="${transaction.baseExperience}"></td>
+                    <td th:text="${transaction.price}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</main>
+</body>
+</html>
