@@ -1,5 +1,6 @@
 package br.com.bxblue.pokecoin.security;
 
+import br.com.bxblue.pokecoin.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="pt-BR">
+<head th:include="include/layout :: htmlhead"><title>Pokecoin</title></head>
+<body>
+<nav th:replace="include/layout :: navbar"></nav>
+
+<main>
+    <div class="container py-4">
+        <h1>Registrar Aquisi&ccedil;ão de Pokemon</h1>
+        <form method="post" action="#" th:action="@{/pokemon/create}" th:object="${dto}">
+            <div class="mb-3">
+                <label for="pokemon" class="form-label">Pokemon</label>
+                <select class="form-control" th:field="${dto.name}" id="pokemon">
+                    <option th:each="option : ${pokemons}" th:value="${option.name}" th:text="${option.name}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

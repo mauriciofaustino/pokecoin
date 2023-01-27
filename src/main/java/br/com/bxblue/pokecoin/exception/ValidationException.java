@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Data
-public class UserValidationException extends Exception {
+public class ValidationException extends Exception {
     final String errorMessage;
 
 }

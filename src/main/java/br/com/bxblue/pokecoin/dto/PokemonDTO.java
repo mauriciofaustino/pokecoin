@@ -8,5 +8,5 @@ import lombok.Data;
 public class PokemonDTO {
     private Long id;
     private String name;
-    private String baseExperience;
+    private Long baseExperience;
 }

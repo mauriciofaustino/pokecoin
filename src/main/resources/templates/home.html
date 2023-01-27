@@ -2,13 +2,32 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="pt-BR">
 <head th:include="include/layout :: htmlhead"><title>Pokecoin</title></head>
 <body>
-<nav th:replace="include/layout :: navbar" ></nav>
+<nav th:replace="include/layout :: navbar"></nav>
 
 <main>
     <div class="container py-4">
-        <img src="#" alt="pokecoin" th:src="@{assets/images/pokecoin.png}" />
+        <div th:if="${mensagem}" th:text="${mensagem}" class="alert alert-primary alert-dismissible fade show mt-3">
+        </div>
+        <img src="#" alt="pokecoin" th:src="@{/assets/images/pokecoin.png}"/>
         <h1>Home</h1>
+        <h3>Seus pokemons</h3>
+        <table  class="table table-hover">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Base XP</th>
+                <th scope="col">Valor em USD</th>
+            </tr>
+            <th:block th:each="pokemon : ${pokemons}">
+                <tr>
+                    <td th:text="${pokemon.id}"></td>
+                    <td th:text="${pokemon.name}"></td>
+                    <td th:text="${pokemon.baseExperience}"></td>
+                    <td></td>
+                </tr>
+            </th:block>
 
+        </table>
     </div>
 </main>
 </body>

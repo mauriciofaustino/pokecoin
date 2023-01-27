@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="pt-BR">
+<head th:include="include/layout :: htmlhead"><title>Pokecoin</title></head>
+<body>
+<nav th:replace="include/layout :: navbar"></nav>
+
+<main>
+    <div class="container py-4">
+        <h1 th:text="${message}"></h1>
+        <a th:href="@{/home}">Voltar para a home</a>
+    </div>
+</main>
+</body>
+</html>

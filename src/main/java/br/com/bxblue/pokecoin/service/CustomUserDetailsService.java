@@ -1,8 +1,9 @@
-package br.com.bxblue.pokecoin.security;
+package br.com.bxblue.pokecoin.service;
 
 
 import br.com.bxblue.pokecoin.entity.User;
 import br.com.bxblue.pokecoin.repository.UserRepository;
+import br.com.bxblue.pokecoin.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,7 +1,7 @@
 package br.com.bxblue.pokecoin.controller;
 
 import br.com.bxblue.pokecoin.entity.User;
-import br.com.bxblue.pokecoin.exception.UserValidationException;
+import br.com.bxblue.pokecoin.exception.ValidationException;
 import br.com.bxblue.pokecoin.service.CreateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class UserController {
         try {
             userCreated = createUserService.execute(user);
             model.addAttribute("user", userCreated);
-        } catch (UserValidationException e) {
+        } catch (ValidationException e) {
             model.addAttribute("erro", e.getErrorMessage());
             model.addAttribute("user", new User());
             return "user/new";

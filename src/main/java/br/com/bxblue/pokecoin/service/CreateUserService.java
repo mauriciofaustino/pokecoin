@@ -1,7 +1,7 @@
 package br.com.bxblue.pokecoin.service;
 
 import br.com.bxblue.pokecoin.entity.User;
-import br.com.bxblue.pokecoin.exception.UserValidationException;
+import br.com.bxblue.pokecoin.exception.ValidationException;
 import br.com.bxblue.pokecoin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,14 +18,14 @@ public class CreateUserService {
         return new BCryptPasswordEncoder();
     }
 
-    public User execute(User user) throws UserValidationException {
+    public User execute(User user) throws ValidationException {
         if(StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) ) {
-            throw new UserValidationException("Preencha o formulário corretamente.");
+            throw new ValidationException("Preencha o formulário corretamente.");
         }
         User existsUser = userRepository.findByUsername(user.getUsername());
 
         if (existsUser != null) {
-            throw new UserValidationException("Usuário já existe.");
+            throw new ValidationException("Usuário já existe.");
         }
 
         user.setPassword(passwordEncoder().encode(user.getPassword()));
