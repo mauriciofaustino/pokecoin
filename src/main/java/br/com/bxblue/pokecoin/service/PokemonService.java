@@ -39,7 +39,7 @@ public class PokemonService {
 
     public void remove(UUID id) throws ValidationException {
         Optional<Pokemon> pokemon = pokemonRepository.findById(id);
-        if (pokemon.isEmpty()) throw new ValidationException("Pokemon nao encontrado");
+        if (!pokemon.isPresent()) throw new ValidationException("Pokemon nao encontrado");
         pokemonRepository.delete(pokemon.get());
         transactionService.registerTransaction(pokemon.get(), "Registro de venda");
     }
