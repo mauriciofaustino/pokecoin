@@ -4,29 +4,20 @@ import br.com.bxblue.pokecoin.dto.PokemonDTO;
 import br.com.bxblue.pokecoin.dto.PokemonResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 public class PokeAPIConsumer {
-    HttpClient client = HttpClient.newHttpClient();
 
     public PokemonDTO getPokemon(String id) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://pokeapi.co/api/v2/pokemon/" + id))
-                .build();
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-                return mapper.readValue(response.body(), PokemonDTO.class);
-            } else {
-                throw new RuntimeException("Error "+ response.statusCode());
-            }
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "https://pokeapi.co/api/v2/pokemon/" + id;
+            String jsonResponse = restTemplate.getForObject(url, String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            return mapper.readValue(jsonResponse, PokemonDTO.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,19 +25,14 @@ public class PokeAPIConsumer {
     }
 
     public List<PokemonDTO> getPokemons() {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://pokeapi.co/api/v2/pokemon/?limit=150"))
-                .build();
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-                PokemonResponse pokemonResponse = mapper.readValue(response.body(), PokemonResponse.class);
-                return pokemonResponse.getResults();
-            } else {
-                throw new RuntimeException("Error "+ response.statusCode());
-            }
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+            String jsonResponse = restTemplate.getForObject(url, String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            PokemonResponse pokemonResponse = mapper.readValue(jsonResponse, PokemonResponse.class);
+            return pokemonResponse.getResults();
         } catch (Exception e) {
             e.printStackTrace();
         }
