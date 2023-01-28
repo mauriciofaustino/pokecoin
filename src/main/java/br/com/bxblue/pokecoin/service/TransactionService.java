@@ -19,7 +19,7 @@ public class TransactionService {
     private UserService userService;
 
     public List<PokemonTransaction> list() {
-        return transactionRepository.findByUserId(userService.getUser().getId());
+        return transactionRepository.findByUserIdOrderByDateCreatedDesc(userService.getUser().getId());
     }
 
     public void registerTransaction(Pokemon pokemon, String type) {

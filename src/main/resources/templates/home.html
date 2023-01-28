@@ -17,6 +17,7 @@
         <table class="table table-hover">
             <tr>
                 <th scope="col">Id</th>
+                <th scope="col">Imagem</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Base XP</th>
                 <th scope="col">Valor em USD</th>
@@ -25,6 +26,7 @@
             <th:block th:each="pokemon : ${pokemons}">
                 <tr>
                     <td th:text="${pokemon.pokemon.id}"></td>
+                    <td><img height="150" width="150" th:src="@{'https://img.pokemondb.net/sprites/home/normal/2x/avif/' + ${pokemon.pokemon.name} + '.avif'}" /></td>
                     <td th:text="${pokemon.pokemon.name}"></td>
                     <td th:text="${pokemon.pokemon.baseExperience}"></td>
                     <td th:text="${pokemon.price}"></td>

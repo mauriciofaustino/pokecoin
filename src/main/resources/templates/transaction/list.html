@@ -20,7 +20,7 @@
                 <tr>
                     <td th:text="${transaction.id}"></td>
                     <td th:text="${transaction.type}"></td>
-                    <td th:text="${transaction.dateCreated}"></td>
+                    <td th:text="${#dates.format(transaction.dateCreated, 'dd/MM/yyyy HH:mm:ss')}"></td>
                     <td th:text="${transaction.name}"></td>
                     <td th:text="${transaction.baseExperience}"></td>
                     <td th:text="${transaction.price}"></td>

@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface TransactionRepository extends JpaRepository<PokemonTransaction, UUID> {
 
-    List<PokemonTransaction> findByUserId(UUID id);
+    List<PokemonTransaction> findByUserIdOrderByDateCreatedDesc(UUID id);
 }
