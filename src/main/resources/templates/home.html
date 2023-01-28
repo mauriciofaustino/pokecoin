@@ -26,7 +26,7 @@
             <th:block th:each="pokemon : ${pokemons}">
                 <tr>
                     <td th:text="${pokemon.pokemon.id}"></td>
-                    <td><img height="150" width="150" th:src="@{'https://img.pokemondb.net/sprites/home/normal/2x/avif/' + ${pokemon.pokemon.name} + '.avif'}" /></td>
+                    <td><img height="115" width="115" th:src="@{'https://img.pokemondb.net/sprites/home/normal/2x/avif/' + ${pokemon.pokemon.name} + '.avif'}" /></td>
                     <td th:text="${pokemon.pokemon.name}"></td>
                     <td th:text="${pokemon.pokemon.baseExperience}"></td>
                     <td th:text="${pokemon.price}"></td>
