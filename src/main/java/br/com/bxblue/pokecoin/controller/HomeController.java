@@ -27,6 +27,10 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/")
+    public String index() {
+        return "login";
+    }
     @RequestMapping("/login")
     public String login() {
         return "login";

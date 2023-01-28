@@ -8,7 +8,7 @@
     <div class="container py-4">
         <div th:if="${mensagem}" th:text="${mensagem}" class="alert alert-primary alert-dismissible fade show mt-3">
         </div>
-        <img src="#" alt="pokecoin" th:src="@{/assets/images/pokecoin.png}"/>
+        <img src="#" alt="pokecoin" height="150" width="150" th:src="@{/assets/images/pokecoin.png}"/>
         <h1>Home</h1>
         <div class="alert alert-primary mt-3">
             <h4>Valor da carteira: $ <span th:text="${wallet}"></span></h4>
