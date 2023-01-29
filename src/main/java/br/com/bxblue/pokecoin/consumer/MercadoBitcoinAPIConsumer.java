@@ -8,10 +8,7 @@ import java.util.Collections;
 
 
 public class MercadoBitcoinAPIConsumer {
-    public static void main(String[] args) {
-        MercadoBitcoinAPIConsumer consumer = new MercadoBitcoinAPIConsumer();
-        System.out.println(consumer.getBtcPrice());
-    }
+
     public Double getBtcPrice() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://www.mercadobitcoin.net/api/BTC/ticker/";

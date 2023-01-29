@@ -1,9 +1,6 @@
 package br.com.bxblue.pokecoin.controller;
 
-import br.com.bxblue.pokecoin.dto.PokemonWithPriceDTO;
 import br.com.bxblue.pokecoin.entity.PokemonTransaction;
-import br.com.bxblue.pokecoin.service.HomeService;
-import br.com.bxblue.pokecoin.service.PokemonService;
 import br.com.bxblue.pokecoin.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
